@@ -28,7 +28,9 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "optimization": true,
+            "aot": true
           },
           "configurations": {
             "production": {
