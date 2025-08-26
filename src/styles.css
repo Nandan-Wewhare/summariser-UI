@@ -1,1 +1,76 @@
 /* You can add global styles to this file, and also import other style files */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.analyzer-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.analyze-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.analyze-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+  margin: 20px 0;
+}
+
+.error {
+  color: #dc3545;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.score {
+  font-size: 24px;
+  font-weight: bold;
+  color: #28a745;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.feedback ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.feedback li {
+  margin-bottom: 8px;
+  color: #666;
+}
