@@ -15,17 +15,11 @@ export class ResumeAnalyzerService {
 
     constructor(private http: HttpClient) { }
 
-    analyzeResume(resume: File, jobDescription: string): Observable<AnalysisResult> {
+    analyzeResume(resume: File, jobDescription: string): Observable<any> {
         const formData = new FormData();
         formData.append('file', resume);
         formData.append('jobDescription', jobDescription);
 
-        return this.http.post<AnalysisResult>(`${this.apiUrl}/Generate`, formData)
-            .pipe(
-                catchError(error => {
-                    console.error('Analysis error:', error);
-                    return throwError(() => new Error('Failed to analyze resume. Please try again.'));
-                })
-            );
+        return this.http.post<any>(`${this.apiUrl}/Generate`, formData);
     }
 }

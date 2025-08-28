@@ -1,0 +1,14 @@
+.word-count {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.error-message {
+  color: #ff0000;
+  margin-left: 10px;
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

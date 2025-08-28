@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { JobDescriptionComponent } from './components/job-desc.component';
 import { FileUploadComponent } from './components/upload.component';
 import { ResumeAnalyzerService } from './services/analyser.service';
@@ -10,8 +11,9 @@ import { ResumeAnalyzerService } from './services/analyser.service';
   imports: [
     CommonModule,
     FileUploadComponent,
-    JobDescriptionComponent
-],
+    JobDescriptionComponent,
+    FormsModule
+  ],
   template: `
     <div class="container">
       <h1>Resume ATS Analyzer</h1>
@@ -42,15 +44,7 @@ import { ResumeAnalyzerService } from './services/analyser.service';
         @if (result) {
           <div class="result">
             <h3>Analysis Result</h3>
-            <div class="score">ATS Pass Probability: {{ result.score }}%</div>
-            <div class="feedback">
-              <h4>Feedback:</h4>
-              <ul>
-                @for (item of result.feedback; track item) {
-                  <li>{{ item }}</li>
-                }
-              </ul>
-            </div>
+            <div class="score">ATS Pass Probability: {{ result }}%</div>
           </div>
         }
       </div>
@@ -63,9 +57,9 @@ export class App {
   jobDescription: string = '';
   loading = false;
   error: string | null = null;
-  result: { score: number; feedback: string[] } | null = null;
+  result: string | null = null;
 
-  constructor(private analyzerService: ResumeAnalyzerService) {}
+  constructor(private analyzerService: ResumeAnalyzerService) { }
 
   onFileSelected(file: File) {
     this.selectedFile = file;
@@ -89,10 +83,17 @@ export class App {
     this.analyzerService.analyzeResume(this.selectedFile, this.jobDescription)
       .subscribe({
         next: (result) => {
-          this.result = result;
+          try {
+            const probabilityMatch = result["chatResult"].match(/Probability:\s*(\d+)/);
+            this.result = probabilityMatch ? probabilityMatch[1] : "0";
+          } catch (e) {
+            console.error('Failed to parse result:', e);
+            this.error = 'Invalid response format';
+          }
           this.loading = false;
         },
         error: (error) => {
+          console.error('Analysis failed:', error);
           this.error = error.message;
           this.loading = false;
         }
