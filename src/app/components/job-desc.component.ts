@@ -13,32 +13,15 @@ import { FormsModule } from '@angular/forms';
         (ngModelChange)="onDescriptionChange($event)"
         placeholder="Paste job description here (minimum 150 words)..."
         rows="6"
-        [class.error-border]="showError"
+        class="form-control mb-2"
+        [class.is-invalid]="showError"
       ></textarea>
-      <div *ngIf="showError" class="error-message">
+      <div *ngIf="showError" class="invalid-feedback">
         Job description must be at least 150 words. Current word count: {{ currentWordCount }}
       </div>
     </div>
   `,
-  styles: [`
-    .job-description textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      resize: vertical;
-    }
-
-    .error-border {
-      border-color: #dc3545 !important;
-    }
-
-    .error-message {
-      color: #dc3545;
-      font-size: 14px;
-      margin-top: 5px;
-    }
-  `]
+  styles: []
 })
 export class JobDescriptionComponent {
   @Output() descriptionChange = new EventEmitter<string>();

@@ -6,36 +6,24 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="file-upload">
-      <input 
-        type="file" 
-        accept=".pdf" 
-        (change)="onFileSelect($event)"
-        class="file-input"
-      >
-      <p class="hint">Only PDF files are allowed</p>
-      @if (error) {
-        <p class="error">{{ error }}</p>
-      }
+    <div class="card bg-light">
+      <div class="card-body">
+        <div class="mb-3">
+          <input 
+            type="file" 
+            accept=".pdf" 
+            (change)="onFileSelect($event)"
+            class="form-control"
+          >
+        </div>
+        <p class="text-muted small mb-0">Only PDF files are allowed</p>
+        @if (error) {
+          <p class="text-danger small mt-2 mb-0">{{ error }}</p>
+        }
+      </div>
     </div>
   `,
-  styles: [`
-    .file-upload {
-      padding: 20px;
-      border: 2px dashed #ccc;
-      border-radius: 4px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .hint {
-      color: #666;
-      font-size: 14px;
-    }
-    .error {
-      color: red;
-      font-size: 14px;
-    }
-  `]
+  styles: []  // Remove custom styles since we're using Bootstrap
 })
 export class FileUploadComponent {
   @Output() fileSelected = new EventEmitter<File>();

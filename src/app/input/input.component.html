@@ -1,18 +1,31 @@
 <form (ngSubmit)="onSubmit()">
-    <textarea [(ngModel)]="text" name="inputText" (input)="onTextChange($event)"
-        placeholder="Enter your text here (minimum 150 words)">
-  </textarea>
+    <div class="form-group mb-3">
+        <textarea 
+            [(ngModel)]="text" 
+            name="inputText" 
+            (input)="onTextChange($event)"
+            placeholder="Enter your text here (minimum 150 words)"
+            class="form-control"
+            rows="6"
+        ></textarea>
 
-    <div class="word-count">
-        Words: {{wordCount}}
-        @if (wordCount > 0 && !isValidWordCount) {
-        <span class="error-message">
-            Please enter at least 150 words
-        </span>
-        }
+        <div class="mt-2">
+            <small class="text-muted">
+                Words: {{wordCount}}
+                @if (wordCount > 0 && !isValidWordCount) {
+                    <span class="text-danger ms-2">
+                        Please enter at least 150 words
+                    </span>
+                }
+            </small>
+        </div>
     </div>
 
-    <button type="submit" [disabled]="!isValidWordCount">
+    <button 
+        type="submit" 
+        [disabled]="!isValidWordCount"
+        class="btn btn-primary"
+    >
         Submit
     </button>
 </form>
