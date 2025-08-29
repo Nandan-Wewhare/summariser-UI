@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { JobDescriptionComponent } from './components/job-desc.component';
 import { FileUploadComponent } from './components/upload.component';
 import { ResumeAnalyzerService } from './services/analyser.service';
@@ -95,11 +94,10 @@ export class App {
   loading = false;
   error: string | null = null;
   result: number | null = null;
-  insights: string | null = null;  // Add this line
+  insights: string | null = null;
 
   constructor(
-    private analyzerService: ResumeAnalyzerService,
-    private toastr: ToastrService
+    private analyzerService: ResumeAnalyzerService
   ) { }
 
   onFileSelected(file: File) {
@@ -134,26 +132,15 @@ export class App {
             this.result = probabilityMatch ? parseInt(probabilityMatch[1], 10) : 0;
             const notesMatch = result["chatResult"].match(/Additional Notes:([\s\S]*?)(?=\n\n|$)/);
             this.insights = notesMatch ? notesMatch[1].trim() : null;
-
-            // Add toast notification based on result
-            if (this.result >= 85) {
-              this.toastr.success('Your resume is well-aligned with the job description!', 'Analysis Complete');
-            } else if (this.result >= 50) {
-              this.toastr.warning('Your resume could use some improvements.', 'Analysis Complete');
-            } else {
-              this.toastr.error('Your resume needs significant changes.', 'Analysis Complete');
-            }
           } catch (e) {
             console.error('Failed to parse result:', e);
             this.error = 'Invalid response format';
-            this.toastr.error('Failed to analyze resume', 'Error');
           }
           this.loading = false;
         },
         error: (error) => {
           console.error('Analysis failed:', error);
           this.error = error.message;
-          this.toastr.error('Failed to analyze resume', 'Error');
           this.loading = false;
         }
       });
