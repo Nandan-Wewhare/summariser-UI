@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-
-interface AnalysisResult {
-    score: number;
-    feedback: string[];
-}
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'

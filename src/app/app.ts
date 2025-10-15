@@ -58,7 +58,7 @@ import { ResumeAnalyzerService } from './services/analyser.service';
                   <h3 class="h5 mb-3">Analysis Result</h3>
                   <div class="card bg-light">
                     <div class="card-body">
-                      <h4 class="text-center mb-3">ATS Pass Probability: 
+                      <h4 class="text-center mb-3">Estimated Resume Compatibility: 
                         <span [class]="'fw-bold ' + (
                           result >= 85 ? 'text-success' : 
                           result >= 50 ? 'text-warning' : 
@@ -86,7 +86,6 @@ import { ResumeAnalyzerService } from './services/analyser.service';
       </div>
     </div>
   `,
-  styleUrl: './app.css'
 })
 export class App {
   selectedFile: File | null = null;
